@@ -1,0 +1,23 @@
+<h1>{{ question.question_text }}</h1>
+
+<ul>
+    {% for answer in answers %}
+    <li>
+        {% if answer.id in selected_ids %}
+            <strong>{{ answer.answer_text }}</strong>
+            {% if answer.is_correct %}
+                (Correct)
+            {% else %}
+                <span style="color: red;">(Wrong)</span>
+            {% endif %}
+        {% else %}
+            {{ answer.answer_text }}
+            {% if answer.is_correct %}
+                <span style="color: green;">(Correct Answer)</span>
+            {% endif %}
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'quizapp:solve' question.id %}">Try again?</a>
