@@ -11,7 +11,7 @@ function QuizApp() {
   ];
 
   const [quizStarted, setQuizStarted] = useState(false);
-  const [shuffledAnswers, setShuffledAnswers] = useState([]);
+  const [shuffledAnswers, setShuffledAnswers] = useState();
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [isAnswered, setIsAnswered] = useState(false);
 
