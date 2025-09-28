@@ -94,8 +94,8 @@ function QuizApp() {
 
   return (
     <div className="quiz-container">
-      <button className="quiz-button" onClick={startOrRestartQuiz}>
-        Start Quiz
+      <button className="get-question-and-submit-answers" onClick={startOrRestartQuiz}>
+        Következő kérdés
       </button>
 
       {quizStarted && currentQuestion && (
@@ -103,12 +103,12 @@ function QuizApp() {
           <h2 className="quiz-question">{currentQuestion.question}</h2>
 
           {currentQuestion.allowMultiple ? (
-            <p style={{ marginBottom: '10px' }}>
-              Select {currentQuestion.answers.filter(a => a.isCorrect).length} answers
+            <p className="anwer-amount-and-result">
+              {currentQuestion.answers.filter(a => a.isCorrect).length} helyes megoldás van.
             </p>
           ) : (
-            <p style={{ marginBottom: '10px' }}>
-              Select one answer
+            <p className="anwer-amount-and-result">
+              Válaszd ki a helyes megoldást!
             </p>
           )}
 
@@ -135,21 +135,21 @@ function QuizApp() {
 
           {!isSubmitted && (
             <button
-              className="quiz-button"
+              className="get-question-and-submit-answers"
               onClick={handleSubmit}
               disabled={selectedAnswers.length === 0}
             >
-              Submit Answer
+              Válasz leadása
             </button>
           )}
 
           {isSubmitted && (
-            <div>
+            <div className="anwer-amount-and-result">
               {selectedAnswers.every(index => shuffledAnswers[index].isCorrect) &&
               shuffledAnswers.filter(ans => ans.isCorrect).length === selectedAnswers.length ? (
-                <p>Correct! 🎉</p>
+                <p>Helyes!</p>
               ) : (
-                <p>Some answers were incorrect. 😢</p>
+                <p>Helytelen válasz!</p>
               )}
             </div>
           )}
