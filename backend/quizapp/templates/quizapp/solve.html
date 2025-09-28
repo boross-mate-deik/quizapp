@@ -1,0 +1,19 @@
+<form action="{% url 'quizapp:solve' question.id %}" method="post">
+    {% csrf_token %}
+    <fieldset>
+        <legend><h1>{{ question.question_text }}</h1></legend>
+        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+        {% if not multiple_answer %}
+            {% for answer in question.answer_set.all %}
+            <input type="radio" name="answersingle" id="answersingle{{ forloop.counter }}" value="{{ answer.id }}">
+            <label for="answersingle{{ forloop.counter }}">{{ answer.answer_text }}</label><br>
+            {% endfor %}
+        {% else %}
+            {% for answer in question.answer_set.all %}
+            <input type="checkbox" name="answer" id="answer{{ forloop.counter }}" value="{{ answer.id }}">
+            <label for="answer{{ forloop.counter }}">{{ answer.answer_text }}</label><br>
+            {% endfor %}
+        {% endif %}
+    </fieldset>
+    <input type="submit" value="Check answers">
+</form>

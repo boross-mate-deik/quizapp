@@ -2,6 +2,9 @@ from django.urls import path
 
 from . import views
 
+app_name = "quizapp"
 urlpatterns = [
-    path("", views.index, name="index"),
+    path("", views.home, name="home"),
+    path("<int:question_id>/", views.solve, name="solve"),
+    path("<int:question_id>/results/", views.results, name="results"),
 ]
