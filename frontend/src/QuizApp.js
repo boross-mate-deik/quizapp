@@ -1,45 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './QuizApp.css';
 
 function QuizApp() {
-  const questions = [
-    {
-      question: "What is the capital of France?",
-      answers: [
-        { text: "Berlin", isCorrect: false },
-        { text: "Madrid", isCorrect: false },
-        { text: "Paris", isCorrect: true },
-        { text: "Rome", isCorrect: false },
-      ],
-      allowMultiple: false,
-    },
-    {
-      question: "Which of the following are programming languages?",
-      answers: [
-        { text: "HTML", isCorrect: false },
-        { text: "Python", isCorrect: true },
-        { text: "JavaScript", isCorrect: true },
-        { text: "CSS", isCorrect: false },
-      ],
-      allowMultiple: true,
-    },
-    {
-      question: "Which animals can fly?",
-      answers: [
-        { text: "Bat", isCorrect: true },
-        { text: "Penguin", isCorrect: false },
-        { text: "Eagle", isCorrect: true },
-        { text: "Elephant", isCorrect: false },
-      ],
-      allowMultiple: true,
-    },
-  ];
-
+  const [questions, setQuestions] = useState([]);
   const [quizStarted, setQuizStarted] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(null);
   const [shuffledAnswers, setShuffledAnswers] = useState([]);
   const [selectedAnswers, setSelectedAnswers] = useState([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  function transformQuestion(apiQuestion) {
+    return {
+      id: apiQuestion.id,
+      question: apiQuestion.question_text,
+      allowMultiple: apiQuestion.multiple_answer,
+      category: apiQuestion.category,
+      answers: apiQuestion.answer_set.map(answer => ({
+        id: answer.id,
+        text: answer.answer_text,
+        isCorrect: answer.is_correct,
+      })),
+    };
+  }
+
+  useEffect(() => {
+    fetch('http://localhost:8000/api/questions/')
+      .then(response => response.json())
+      .then(data => {
+        const transformed = data.map(transformQuestion);
+        setQuestions(transformed);
+      })
+      .catch(error => console.error('Error fetching questions:', error));
+  }, []);
 
   function shuffleArray(array) {
     const shuffled = [...array];
@@ -51,6 +43,7 @@ function QuizApp() {
   }
 
   function startOrRestartQuiz() {
+    if (questions.length === 0) return;
     const randomQuestion = questions[Math.floor(Math.random() * questions.length)];
     const shuffled = shuffleArray(randomQuestion.answers);
     setCurrentQuestion(randomQuestion);
@@ -69,14 +62,13 @@ function QuizApp() {
       : 1;
 
     if (currentQuestion.allowMultiple) {
-      // For multiple answers
       if (isSelected) {
         setSelectedAnswers(selectedAnswers.filter(i => i !== index));
       } else if (selectedAnswers.length < maxSelectable) {
         setSelectedAnswers([...selectedAnswers, index]);
       }
     } else {
-      // For single answer — always set selected to the clicked index
+      // 🆕 Single-answer: always allow replacing the previous selection
       setSelectedAnswers([index]);
     }
   }
@@ -110,12 +102,11 @@ function QuizApp() {
         <>
           <h2 className="quiz-question">{currentQuestion.question}</h2>
 
-          {currentQuestion.allowMultiple && (
+          {currentQuestion.allowMultiple ? (
             <p style={{ marginBottom: '10px' }}>
               Select {currentQuestion.answers.filter(a => a.isCorrect).length} answers
             </p>
-          )}
-          {!currentQuestion.allowMultiple && (
+          ) : (
             <p style={{ marginBottom: '10px' }}>
               Select one answer
             </p>
