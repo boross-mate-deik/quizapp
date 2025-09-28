@@ -54,20 +54,20 @@ nevükön és azonosítóikon kívül.
 		* Kijelentkezés
 		* Eredmények
 
-###Fizikai környezet
-	* Az alkalmazás web platformra készül
-	* Fejlesztői eszközök
-		* Visual Studio Code
-		* Pycharm
-		* React
-		* Django
-		* SQL
+### Fizikai környezet
+* Az alkalmazás web platformra készül
+* Fejlesztői eszközök
+	* Visual Studio Code
+	* Pycharm
+	* React
+	* Django
+	* SQL
 		
-###Architektuális terv
-	* Frontend:
-		* A frontend React keresztrendszer segítségével Javascriptben lesz elkészítve.
-	* Backend:
-		* A backend Django web keretrendszer segítségével, Pythonban készül
+### Architektuális terv
+* Frontend:
+	* A frontend React keresztrendszer segítségével Javascriptben lesz elkészítve.
+* Backend:
+	* A backend Django web keretrendszer segítségével, Pythonban készül
 
 ### Tesztterv
 * A tesztek célja a rendszer és komponensei funkcionalitásának teljes vizsgálata, ellenőrzése, a rendszer által megvalósított szolgáltatások ellenőrzése és biztosítása.
