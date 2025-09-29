@@ -14,9 +14,10 @@ __Projektmunkássok és felelőségek__
 |Rendszerterv||0|16|16|8|8|
 |Adattárolás|Adatmodell megtervezése|0|4|4|0|4|
 ||Adatbázis megvalósítása a backenden|1|1|1|0|1|
-
-
-### Üzleti folyamatok modellje
+|Frontend|Kvíz hozzáadás|1|3|3|0|3|
+||Bejelentkezési oldal|1|3|3|0|3|
+|Backend| Kvíz felvétele|1|4|4|0|4|
+||Bejelentkezés megvalósitása|1|4|4|0|4|
 
 ### Követlemények
 * Funkcionális követelmények
@@ -41,6 +42,25 @@ nevükön és azonosítóikon kívül.
 	* GDPR-nak való megfelelés
 
 ### Funkcionális terv
+* Rendszerszereplők
+  * Admin
+  * Felhasználó
+  * Vendég felhasználó
+* Rendszereléretőség
+	* Admin
+      * Teljes hozzáférése van a rendszerhez.
+      * Kvíz készítése
+      * Kvíz törlése 
+      * Kvíz módositása
+      * Kvíz kitöltése, ellenőrzése
+    * Vendég felhasználó
+      * Kvíz kitöltése
+      * Eredmény megnézése
+    * Bejelentkezett felhasználó
+      * Kvíz kitöltése
+      * Kvíz hozzáadása
+      * Eredmények mentése
+
 * Menü-hierarchiák:
 	* BEJELENTKEZÉS:
 		*Bejelentkezés
@@ -61,7 +81,7 @@ nevükön és azonosítóikon kívül.
 	* Pycharm
 	* React
 	* Django
-	* SQL
+	* SQLlite
 		
 ### Architektuális terv
 * Frontend:
@@ -78,9 +98,16 @@ nevükön és azonosítóikon kívül.
 	* Frontend
 		* A felület reszponzív kell legyen.
 		* A UI elemek, ellátják a funkcióikat.
-		* 
 		* Különböző méreteken a felület mindig próbál alkalmazkodni.
+		* Olvashatónak kell lennie az UI elemeknek.
+		* A felhasználó visszajelzést kap mindenre.
+		* Az eredménynek elérhetőnek kell lennie felhasználónak.
 	* Backend
+		* Képesnek kell lennie elérni az adatbázist
+		* Képesnek kell lennie módositani az adatbázist.
+		* Képesnek kell lennie több felhasználó kiszolgálására.
+		* Képesnek kell lennie minden funkció elvégzésére.
+
 ### Telepítési terv
 * Webes alkalmazás
 	* A szoftver webes felületéhez csak egy böngésző telepítése szükséges. Külön szoftver nem kell hozzá.
